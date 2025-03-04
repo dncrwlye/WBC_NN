@@ -1,0 +1,238 @@
+04/11/21
+04/11/21
+04/11/21
+04/11/21
+04/11/21
+04/11/21
+04/11/21
+04/11/21
+
+reminder watch n=2 nvidia-smi
+
+#___________________________________resize images___________________________________
+#___________________________________resize images___________________________________
+#___________________________________resize images___________________________________
+#___________________________________resize images___________________________________
+#___________________________________resize images___________________________________
+#___________________________________resize images___________________________________
+
+
+python /Users/dancrowley/Desktop/bioinformatics/final_project/image_resize.py --image_cropped /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/original/Lymphocytes --imdir /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/original/Lymphocytes_resized
+
+python /Users/dancrowley/Desktop/bioinformatics/final_project/image_resize.py --image_cropped /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/original/Monocytes --imdir /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/original/Monocytes_resized
+
+
+python /Users/dancrowley/Desktop/bioinformatics/final_project/image_resize.py --image_cropped /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/original/NK_or_Cytotoxic_T_Cells --imdir /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/original/NK_or_Cytotoxic_T_Cells_resized
+
+##############################################################################################
+
+#___________________________________change HEIC to PNG images___________________________________
+#___________________________________change HEIC to PNG images___________________________________
+#___________________________________change HEIC to PNG images___________________________________
+#___________________________________change HEIC to PNG images___________________________________
+#___________________________________change HEIC to PNG images___________________________________
+#___________________________________change HEIC to PNG images___________________________________
+#___________________________________change HEIC to PNG images___________________________________
+
+
+
+cd /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/original/dans_photos
+
+#convert images from .HEIC to .JPG:
+
+
+# 1
+set -eu -o pipefail
+
+# 2
+count=$(find . -depth 1 -name "*.HEIC" | wc -l | sed 's/[[:space:]]*//')
+echo "converting $count files .HEIC files to .jpg"
+
+# 3
+magick mogrify -monitor -format jpg *.HEIC
+
+# 4
+echo "Remove .HEIC files? [y/n]"
+read remove
+
+# 5
+if [[ "$remove" == "y" ]]; then
+  find . -depth 1 -name "*.HEIC" -delete
+fi
+
+
+
+python /Users/dancrowley/Desktop/bioinformatics/final_project/image_resize.py --image_cropped /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/original/dans_photos --imdir /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/original/dans_photos_resized
+
+
+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+
+#___________________________________move the files___________________________________
+#___________________________________move the files___________________________________
+#___________________________________move the files___________________________________
+#___________________________________move the files___________________________________
+#___________________________________move the files___________________________________
+#___________________________________move the files___________________________________
+#___________________________________move the files___________________________________
+
+
+
+once i was in my home directory this work: jesus
+
+mkdir original augmented tmp train valid train_annotations valid_annotations
+
+
+scp -r  /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/original/combined dcrowley@Mdlab-dell-06.msu.montana.edu:/home/dcrowley/images_hema_2/original
+
+
+#scp -r  /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/via_project_11Apr2021_19h22m_csv.csv dcrowley@Mdlab-dell-06.msu.montana.edu:/home/dcrowley/images_hema_2/
+
+scp -r  /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/via_project_11Apr2021_19h22m_csv_try_2.csv dcrowley@Mdlab-dell-06.msu.montana.edu:/home/dcrowley/images_hema_2/
+
+
+
+
+scp -r  dcrowley@Mdlab-dell-06.msu.montana.edu:/home/dcrowley/images_hema_2/images /Users/dancrowley/Desktop/bioinformatics/final_project_try_3
+
+
+
+
+WBC DIFF 
+WBC DIFF 
+WBC DIFF 
+
+scp -r  /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/WBC_DFF_csv.csv dcrowley@Mdlab-dell-06.msu.montana.edu:/home/dcrowley/wbc_diff/
+
+cp -r /home/dcrowley/images_hema_2/original /home/dcrowley/wbc_diff/original
+
+#___________________________________move back to the remote server___________________
+
+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+
+return to main directory
+
+cd /home/dcrowley/images_hema_2
+
+dos2unix via_project_11Apr2021_19h22m_csv_try_2.csv
+
+
+#cp /home/dcrowley/images_hema/0-convert_csv_radio.sh /home/dcrowley/images_hema_2
+#cp /home/dcrowley/images_hema/1-augmentation.py /home/dcrowley/images_hema_2
+#cp /home/dcrowley/images_hema/2-labels_csv2xml.py /home/dcrowley/images_hema_2
+#cp /home/dcrowley/images_hema/3-train-segmentation.py /home/dcrowley/images_hema_2
+#cp /home/dcrowley/images_hema/4-evaluate-segmentation.py /home/dcrowley/images_hema_2
+
+./0-convert_csv_radio.sh via_project_11Apr2021_19h22m_csv_try_2.csv 1000 1000
+
+
+cp /home/dcrowley/images_hema_2/original/combined/*.png /home/dcrowley/images_hema_2/original
+
+cd combined 
+
+rm -r combined
+
+remove-transparency.py
+
+python3 1-augmentation.py
+
+
+
+Traceback (most recent call last):
+  File "1-augmentation.py", line 405, in <module>
+    bbs_a.draw_on_image(augmented_img, size=2)
+  File "/usr/local/lib/python3.6/dist-packages/imgaug/augmentables/bbs.py", line 1745, in draw_on_image
+    thickness=thickness
+  File "/usr/local/lib/python3.6/dist-packages/imgaug/augmentables/bbs.py", line 949, in draw_on_image
+    thickness=thickness
+  File "/usr/local/lib/python3.6/dist-packages/imgaug/augmentables/bbs.py", line 861, in draw_box_on_image
+    y1, y2, x1, x2 = self.y1_int, self.y2_int, self.x1_int, self.x2_int
+  File "/usr/local/lib/python3.6/dist-packages/imgaug/augmentables/bbs.py", line 106, in y1_int
+    return int(np.round(self.y1))
+ValueError: cannot convert float NaN to integer
+
+
+
+fgrep -v ",," all_labels.csv > tmp.csv
+mv tmp.csv all_labels.csv
+
+mkdir tmp valid valid_annotations train train_annotations
+
+python3 2-labels_csv2xml.py
+
+mv *.xml tmp
+
+cp original/*.png tmp
+cp augmented/*.png tmp
+
+cd tmp 
+
+
+
+
+
+find . -maxdepth 1 -name "*.png" -print | sort > image.lst
+shuf -o shuffled.lst image.lst
+head -n `wc -l shuffled.lst | awk '{print int($1/4)}'` shuffled.lst | xargs -i mv {} ../valid
+mv *.png ../train
+perl -pi -e 's/png/xml/g' shuffled.lst
+head -n `wc -l shuffled.lst | awk '{print int($1/4)}'` shuffled.lst | xargs -i mv {} ../valid_annotations
+mv *.xml ../train_annotations
+cd ..
+
+
+mv: cannot stat './perspective_IMG_5614.xml': No such file or directory
+mv: cannot stat './perspective_CRED003_B_56_02_60x_Image_1.xml': No such file or directory
+mv: cannot stat './perspective_ACTOW010_B_60_06Sept2019_60x_Image_3.xml': No such file or directory
+mv: cannot stat './perspective_IMG_5565.xml': No such file or directory
+mv: cannot stat './perspective_IMG_5600.xml': No such file or directory
+mv: cannot stat './perspective_CRED003_B_49_01_60x_Image_1.xml': No such file or directory
+
+
+
+python3 3-train-segmentation.py
+
+nano 4-evaluate-segmentation.py
+
+cells_cfg20210412T1607
+
+cd train
+mv *.png ../tmp
+ls
+cd ..
+
+cd train_annotations
+mv *.xml ../tmp
+ls
+cd ..
+
+cd valid 
+mv *.png ../tmp
+ls
+cd ..
+
+cd valid_annotations
+mv *.xml ../tmp
+ls
+cd ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+

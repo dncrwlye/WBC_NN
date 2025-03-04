@@ -1,0 +1,99 @@
+WBC DIFF 
+WBC DIFF 
+WBC DIFF 
+
+scp -r  /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/WBC_DFF_csv.csv dcrowley@Mdlab-dell-06.msu.montana.edu:/home/dcrowley/wbc_diff/
+
+cp -r /home/dcrowley/images_hema_2/original /home/dcrowley/wbc_diff/original
+
+dos2unix WBC_DFF_csv.csv
+
+cp /home/dcrowley/images_hema_2/0-convert_csv_radio.sh /home/dcrowley/wbc_diff
+cp /home/dcrowley/images_hema_2/1-augmentation.py /home/dcrowley/wbc_diff
+cp /home/dcrowley/images_hema_2/2-labels_csv2xml.py /home/dcrowley/wbc_diff
+cp /home/dcrowley/images_hema_2/3-train-segmentation.py /home/dcrowley/wbc_diff
+cp /home/dcrowley/images_hema_2/4-evaluate-segmentation.py /home/dcrowley/wbc_diff
+
+./0-convert_csv_radio.sh WBC_DFF_csv.csv 1000 1000
+
+remove-transparency.py
+
+python3 1-augmentation.py
+
+fgrep -v ",," all_labels.csv > tmp.csv
+mv tmp.csv all_labels.csv
+
+python3 2-labels_csv2xml.py
+
+
+cp original/*.png tmp
+cp augmented/*.png tmp
+
+cd tmp 
+
+
+
+
+
+find . -maxdepth 1 -name "*.png" -print | sort > image.lst
+shuf -o shuffled.lst image.lst
+head -n `wc -l shuffled.lst | awk '{print int($1/4)}'` shuffled.lst | xargs -i mv {} ../valid
+mv *.png ../train
+perl -pi -e 's/png/xml/g' shuffled.lst
+head -n `wc -l shuffled.lst | awk '{print int($1/4)}'` shuffled.lst | xargs -i mv {} ../valid_annotations
+mv *.xml ../train_annotations
+cd ..
+
+
+
+RBC COUNT
+RBC COUNT
+RBC COUNT
+
+scp -r  /Users/dancrowley/Desktop/bioinformatics/final_project_try_3/RBC_only_csv.csv dcrowley@Mdlab-dell-06.msu.montana.edu:/home/dcrowley/RBC/
+
+cp -r /home/dcrowley/images_hema_2/original /home/dcrowley/RBC
+
+dos2unix RBC_only_csv.csv 
+
+cp /home/dcrowley/images_hema_2/0-convert_csv_radio.sh /home/dcrowley/RBC
+cp /home/dcrowley/images_hema_2/1-augmentation.py /home/dcrowley/RBC
+cp /home/dcrowley/images_hema_2/2-labels_csv2xml.py /home/dcrowley/RBC
+cp /home/dcrowley/images_hema_2/3-train-segmentation.py /home/dcrowley/RBC
+cp /home/dcrowley/images_hema_2/4-evaluate-segmentation.py /home/dcrowley/RBC
+
+./0-convert_csv_radio.sh RBC_only_csv.csv 1000 1000
+
+
+remove-transparency.py
+
+python3 1-augmentation.py
+
+fgrep -v ",," all_labels.csv > tmp.csv
+mv tmp.csv all_labels.csv
+
+
+
+python3 2-labels_csv2xml.py
+
+
+cp original/*.png tmp
+cp augmented/*.png tmp
+
+cd tmp 
+
+
+find . -maxdepth 1 -name "*.png" -print | sort > image.lst
+shuf -o shuffled.lst image.lst
+head -n `wc -l shuffled.lst | awk '{print int($1/4)}'` shuffled.lst | xargs -i mv {} ../valid
+mv *.png ../train
+perl -pi -e 's/png/xml/g' shuffled.lst
+head -n `wc -l shuffled.lst | awk '{print int($1/4)}'` shuffled.lst | xargs -i mv {} ../valid_annotations
+mv *.xml ../train_annotations
+cd ..
+
+
+
+
+
+
